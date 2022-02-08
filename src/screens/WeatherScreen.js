@@ -3,8 +3,9 @@ import axios from 'axios';
 import { useParams } from "react-router";
 
 function WeatherScreen() {
-    const { lat } = useParams();
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=20&lon=100&appid=a5dfba1fdabe4fab8d45adfbc3238faa`;
+    const lat = 30;
+    const long = 30;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=a5dfba1fdabe4fab8d45adfbc3238faa`;
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
@@ -23,7 +24,7 @@ function WeatherScreen() {
     }
     return (
         <div>
-
+            failed
         </div>
     )
 

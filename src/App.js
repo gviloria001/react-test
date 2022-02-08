@@ -10,6 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WeatherScreen />}></Route>
+        <Route path="/lat:lat/long:long" element={<WeatherScreen />}></Route>
       </Routes>
     </BrowserRouter>
   );
