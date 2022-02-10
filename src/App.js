@@ -1,18 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import WeatherScreen from './screens/WeatherScreen';
+import TestScreen from './screens/TestScreen';
+
 
 
 
 function App() {
+  const [coord, setCoord] = useState({});
+  let navigate = useNavigate();
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setCoord(values => ({
+      ...values, [name]: value
+    }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/lat${coord.lat}/long${coord.long}`)
+  }
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<WeatherScreen />}></Route>
-        <Route path="/lat:lat/long:long" element={<WeatherScreen />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <div className='container' >
+      <header className='row'>
+        This is the header
+      </header>
+
+      <main>
+        <div className='cardbody'>
+          <div>
+            hello
+          </div>
+          <Routes>
+            <Route path="/" element={<WeatherScreen />}></Route>
+            <Route path="/lat:lat/long:long" element={<WeatherScreen />}></Route>
+            <Route path="/:lat/:long" element={<TestScreen />}></Route>
+          </Routes>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Latitude
+              <input type="text" name="lat" value={coord.lat} onChange={handleChange} />
+            </label>
+            <label>
+              Longitude
+              <input type="text" name="long" value={coord.long} onChange={handleChange} />
+            </label>
+            <input type="submit" />
+          </form>
+        </div>
+      </main>
+
+      <footer className='row center'>
+        this is the footer
+      </footer>
+    </div >
   );
 }
 
