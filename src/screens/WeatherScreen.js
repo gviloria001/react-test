@@ -5,7 +5,6 @@ import api from '../api.json';
 
 function WeatherScreen() {
     const { lat, long } = useParams()
-    const navigate = useNavigate;
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=a5dfba1fdabe4fab8d45adfbc3238faa`;
     //const url = 'https://api.openweathermap.org/data/2.5/weather?lat=33&lon=-118&units=imperial&appid=a5dfba1fdabe4fab8d45adfbc3238faa'
 

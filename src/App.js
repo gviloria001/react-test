@@ -37,7 +37,6 @@ function App() {
           <Routes>
             <Route path="/react-test" element={<WeatherScreen />}></Route>
             <Route path="/react-test/lat:lat/long:long" element={<WeatherScreen />}></Route>
-
           </Routes>
           <form onSubmit={handleSubmit}>
             <label>
