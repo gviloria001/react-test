@@ -20,7 +20,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/lat${coord.lat}/long${coord.long}`)
+    navigate(`/react-test/lat${coord.lat}/long${coord.long}`)
   }
 
   return (
@@ -35,9 +35,9 @@ function App() {
             hello
           </div>
           <Routes>
-            <Route path="/" element={<WeatherScreen />}></Route>
-            <Route path="/lat:lat/long:long" element={<WeatherScreen />}></Route>
-            <Route path="/:lat/:long" element={<TestScreen />}></Route>
+            <Route path="/react-test" element={<WeatherScreen />}></Route>
+            <Route path="/react-test/lat:lat/long:long" element={<WeatherScreen />}></Route>
+
           </Routes>
           <form onSubmit={handleSubmit}>
             <label>
