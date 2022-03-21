@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { useNavigate, useParams } from "react-router";
-import api from '../api.json';
+import { useParams } from "react-router";
 
 function WeatherScreen() {
     const { lat, long } = useParams()
@@ -22,8 +21,11 @@ function WeatherScreen() {
     if (product) {
         return (
             <ul className="Weather">
-                <li>{product.name}</li>
-                <li>{product.main.temp}</li>
+                <li>{product.name}</li>                
+                <li>Longitude: {product.coord.lon}</li>
+                <li>Latitude: {product.coord.lat}</li>
+                <li>Temp: {product.main.temp}F</li>
+                <li>But it feels like {product.main.feels_like}F</li>
             </ul>
         )
     }

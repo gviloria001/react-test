@@ -31,21 +31,18 @@ function App() {
 
       <main>
         <div className='cardbody'>
-          <div>
-            hello
-          </div>
           <Routes>
             <Route path="/react-test" element={<WeatherScreen />}></Route>
             <Route path="/react-test/lat:lat/long:long" element={<WeatherScreen />}></Route>
           </Routes>
           <form onSubmit={handleSubmit}>
             <label>
-              Latitude
-              <input type="text" name="lat" value={coord.lat} onChange={handleChange} />
-            </label>
-            <label>
               Longitude
               <input type="text" name="long" value={coord.long} onChange={handleChange} />
+            </label>
+            <label>
+              Latitude
+              <input type="text" name="lat" value={coord.lat} onChange={handleChange} />
             </label>
             <input type="submit" />
           </form>
