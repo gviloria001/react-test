@@ -83,3 +83,11 @@ footer{
   text-align: center;
   border: black solid;
 }
+.weather{
+  border: 2px black solid;
+  border-radius: 100px;
+  
+}
+.weather :hover{
+  background-color: yellow;
+}

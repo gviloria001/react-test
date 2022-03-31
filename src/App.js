@@ -6,9 +6,6 @@ import HistoryScreen from './screens/HistoryScreen';
 import axios from 'axios';
 import TestScreen from './screens/TestScreen';
 
-
-const historyArray = [];
-
 function App() {
 
   const [coord, setCoord] = useState({
@@ -59,6 +56,7 @@ function App() {
     lat: 33,
     long: -118,
     submitted: false,
+    historyArray: []
   });
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${coord.lat}&lon=${coord.long}&units=imperial&appid=a5dfba1fdabe4fab8d45adfbc3238faa`;
 
@@ -69,22 +67,34 @@ function App() {
       setCoord(values => ({
         ...values, [name]: value
       }))
-    }, 100)
+    }, 500)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.get(url)
-      .then(response => {
-        coord.data = response.data;
-        setCoord(values => ({
-          ...values,
-          submitted: true,
-        }))
-        historyArray.push(response.data)
-      }).catch(e => {
-        console.log(e);
-      })
+    if (coord.lat != null && coord.long != null) {
+      axios.get(url)
+        .then(response => {
+          coord.data = response.data;
+          if (coord.historyArray.length <= 4) {
+            setCoord(values => ({
+              ...values,
+              submitted: true,
+              historyArray: [...coord.historyArray, response.data]
+            }))
+          }
+          else {
+            coord.historyArray.shift()
+            setCoord(values => ({
+              ...values,
+              submitted: true,
+              historyArray: [...coord.historyArray, response.data]
+            }))
+          }
+        }).catch(e => {
+          console.log(e);
+        })
+    }
   }
 
   return (
@@ -95,10 +105,12 @@ function App() {
 
       <main>
         <div className='cardbody'>
-          <HistoryScreen historyArray={historyArray} />
+          <h1>Recent Searches</h1>
+          <HistoryScreen historyArray={coord.historyArray} />
         </div>
 
         <div className='cardbody'>
+          <h1>Current Location</h1>
           <WeatherScreen params={coord.data} />
           <form onSubmit={handleSubmit}>
             <label>
@@ -114,6 +126,7 @@ function App() {
         </div>
 
         <div className='cardbody'>
+          <h1>Additional Info</h1>
           <TestScreen params={coord.data} />
         </div>
       </main>
