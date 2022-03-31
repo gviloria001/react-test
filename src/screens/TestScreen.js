@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { render } from "@testing-library/react";
 
 export default function TestScreen({ params }) {
+
     return (
         <ul className="Weather">
             <li>{params.name}</li>

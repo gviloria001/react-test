@@ -7,9 +7,10 @@ import axios from 'axios';
 import TestScreen from './screens/TestScreen';
 
 
-
+const historyArray = [];
 
 function App() {
+
   const [coord, setCoord] = useState({
     data: {
       "coord": {
@@ -77,8 +78,10 @@ function App() {
       .then(response => {
         coord.data = response.data;
         setCoord(values => ({
-          ...values, submitted: true
+          ...values,
+          submitted: true,
         }))
+        historyArray.push(response.data)
       }).catch(e => {
         console.log(e);
       })
@@ -92,7 +95,7 @@ function App() {
 
       <main>
         <div className='cardbody'>
-          <TestScreen params={coord.data} />
+          <HistoryScreen historyArray={historyArray} />
         </div>
 
         <div className='cardbody'>
@@ -111,7 +114,7 @@ function App() {
         </div>
 
         <div className='cardbody'>
-
+          <TestScreen params={coord.data} />
         </div>
       </main>
 
